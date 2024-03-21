@@ -180,7 +180,7 @@ def create_errosion_dilation_search(img):
             # calculate the difference to the mean of the neighbors
             diff[i,j] = (counts[i,j]*4 - (counts[i-1,j] + counts[i+1,j] + counts[i,j-1] + counts[i,j+1])) 
             # weight it with the difference between all the neighbors
-            diff[i,j] = diff[i,j] * (np.abs(counts[i-1,j] - counts[i+1,j]) + np.abs(counts[i,j-1] - counts[i,j+1])) 
+            diff[i,j] = diff[i,j] + (np.abs(counts[i-1,j] - counts[i+1,j]) + np.abs(counts[i,j-1] - counts[i,j+1])) 
             # make sure diff is an integer, round and convert to int
             diff[i,j] = round(diff[i,j])
 
@@ -244,9 +244,9 @@ def create_errosion_dilation_search(img):
     results = []
     for i in range(len(minima[0])):
         ax[1].scatter(minima[1][i] + 1, minima[0][i] + 1, c='r', marker='x')
-        print(f"found minimum at: {minima[0][i]}, {minima[1][i]}, with value: {counts[minima[0][i], minima[1][i]]}")
+        print(f"found minimum at: {minima[0][i]}, {minima[1][i]}, with value: {counts[minima[0][i]+1, minima[1][i]+1]}")
         # calculate corrosponding errosion and dilation and plants
-        results.append((minima[0][i] +1+ errosion_iterations[0], minima[1][i]+1 + dilation_iterations[0], counts[minima[0][i], minima[1][i]]))
+        results.append((minima[0][i] +1+ errosion_iterations[0], minima[1][i]+1 + dilation_iterations[0], counts[minima[0][i] +1, minima[1][i]+1]))
     plt.tight_layout()
 
     print(f"Minimum errosion: {errosion_iterations[0]}, Minimum dilation: {dilation_iterations[0]}")

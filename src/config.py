@@ -9,8 +9,8 @@ threshold_s_upper = 1.0
 threshold_v_lower = 50
 threshold_v_upper = 360 
 
-errosion_iterations_default = 3
-dilation_iterations_default = 13
+errosion_iterations_default = 2
+dilation_iterations_default = 12
 
 errosion_iterations_search_range = (1,10)
 dilation_iterations_search_range = (5,20)
